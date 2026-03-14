@@ -1,54 +1,55 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
-namespace UnrealBuildTool.Rules
+namespace UnrealBuildTool.Rules;
+
+public class FFMPEGMediaFactory : ModuleRules
 {
-	public class FFMPEGMediaFactory : ModuleRules
+	public FFMPEGMediaFactory(ReadOnlyTargetRules Target) : base(Target)
 	{
-		public FFMPEGMediaFactory(ReadOnlyTargetRules Target) : base(Target)
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		ShadowVariableWarningLevel = WarningLevel.Error;
+		OptimizeCode = CodeOptimization.Never;
+
+		DynamicallyLoadedModuleNames.AddRange(
+			new string[]
+			{
+				"Media"
+			});
+
+		PrivateDependencyModuleNames.AddRange(
+			new string[]
+			{
+				"Core",
+				"CoreUObject",
+				"MediaAssets"
+			});
+
+		PrivateIncludePathModuleNames.AddRange(
+			new string[]
+			{
+				"Media",
+				"FFMPEGMedia"
+			});
+
+		PrivateIncludePaths.AddRange(
+			new string[]
+			{
+				"FFMPEGMediaFactory/Private"
+			});
+
+		PublicDependencyModuleNames.AddRange(
+			new string[]
+			{
+				"Core",
+				"CoreUObject"
+			});
+
+		if (Target.Type == TargetType.Editor)
 		{
-			PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-			ShadowVariableWarningLevel = WarningLevel.Error;
-			OptimizeCode = CodeOptimization.Never;
-
-			DynamicallyLoadedModuleNames.AddRange(
-				new string[] {
-					"Media",
-				});
-
-			PrivateDependencyModuleNames.AddRange(
-				new string[] {
-					"Core",
-					"CoreUObject",
-					"MediaAssets",
-				});
-
-			PrivateIncludePathModuleNames.AddRange(
-				new string[] {
-					"Media",
-					"FFMPEGMedia",
-				});
-
-			PrivateIncludePaths.AddRange(
-				new string[] {
-					"FFMPEGMediaFactory/Private",
-				});
-
-			PublicDependencyModuleNames.AddRange(
-				new string[] {
-					"Core",
-					"CoreUObject",
-				});
-
-			if (Target.Type == TargetType.Editor)
-			{
-				DynamicallyLoadedModuleNames.Add("Settings");
-				PrivateIncludePathModuleNames.Add("Settings");
-			}
-
-			if (Target.Platform == UnrealTargetPlatform.Win64)
-			{
-				DynamicallyLoadedModuleNames.Add("FFMPEGMedia");
-			}
+			DynamicallyLoadedModuleNames.Add("Settings");
+			PrivateIncludePathModuleNames.Add("Settings");
 		}
+
+		if (Target.Platform == UnrealTargetPlatform.Win64) DynamicallyLoadedModuleNames.Add("FFMPEGMedia");
 	}
 }
