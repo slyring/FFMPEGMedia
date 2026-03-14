@@ -41,7 +41,7 @@ public class FFMPEGMedia : ModuleRules
 	{
 		bool isLibrarySupported = false;
 
-		if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			isLibrarySupported = true;
 
@@ -108,7 +108,7 @@ public class FFMPEGMedia : ModuleRules
                     
           string finalPath =  Path.Combine(ModulePath, "FFMPEGMedia_APL.xml");
           System.Console.WriteLine("... APL Path -> " + finalPath);
-          AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", finalPath));
+          // AdditionalPropertiesForReceipt.Add(new ReceiptProperty("AndroidPlugin", finalPath));
         }
 
 		if (isLibrarySupported)
